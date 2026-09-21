@@ -31,10 +31,10 @@
           <h1 class="title is-1 publication-title">Automated Temporal Localization of Behavior
             in Cichlid Fish with Few-Shot Trajectory Tokens</h1>
           <div class="is-size-5 publication-authors">
-            <span class="author-block">Bhargav Srinivasan<sup>1,2</sup>,</span>
-            <span class="author-block">William Lamousin<sup>1</sup>,</span>
-            <span class="author-block">Jason Liu<sup>1</sup>,</span>
-            <span class="author-block">Charles Phan<sup>1</sup>,</span>
+            <span class="author-block">Bhargav Srinivasan<sup>1,&ast;</sup>,</span>
+            <span class="author-block">William Lamousin<sup>1,&ast;</sup>,</span>
+            <span class="author-block">Jason Liu<sup>1,&dagger;</sup>,</span>
+            <span class="author-block">Charles Phan<sup>1,&dagger;</sup>,</span>
             <span class="author-block">Ofure Osunbor<sup>2</sup>,</span>
             <span class="author-block">Shubh Sharma<sup>1</sup>,</span>
             <span class="author-block">Cade McGeehan<sup>2</sup>,</span>
@@ -46,6 +46,7 @@
             <span class="author-block"><a target="_blank" href="https://www.cs.umd.edu/~pulkit/">Pulkit Kumar</a><sup>1</sup>,</span>
             <span class="author-block"><a target="_blank" href="https://www.cs.umd.edu/~abhinav/">Abhinav Shrivastava</a><sup>1</sup></span>
             <br><sup>1</sup>Dept.&nbsp;of Computer Science, University of Maryland&nbsp;&nbsp;&nbsp;<sup>2</sup>Dept.&nbsp;of Biology, University of Maryland
+            <br>&ast; Equal contribution.&nbsp;&nbsp;&nbsp;&dagger; Equal contribution.
             <br>CV4Ecology Workshop, ECCV 2026
           </div>
 
@@ -131,13 +132,16 @@
       <div class="columns is-centered has-text-centered">
         <div class="column is-two-thirds">
           <div class="content has-text-justified">
-            Understanding the brain requires studying its observable output: behavior. Such
-            behavioral experiments in cichlid fish require manual annotation of aquarium video at
-            real-time playback speed, isolated to single time points that lack temporal context.
-            We propose <strong>FSH-TAL</strong>, a temporal localization model that learns from
-            sparse point annotations and predicts behavior-specific temporal segments on
-            long-form video. On 17 hours of footage, FSH-TAL reaches state-of-the-art mAP
-            (42.8% averaged across IoU 0.1&ndash;0.7).
+            Understanding the brain requires studying its observable output: behavior. Cichlid
+            fish provide a model system for changing brain function and studying its effect on
+            well-defined behaviors. Such experiments require manual annotation of aquarium video
+            at real-time playback speed, which is time consuming to generate and produces single
+            time points that lack the temporal context of the underlying behavior. We provide a
+            benchmarking dataset for animal behavior containing &sim;17 hours of annotated cichlid
+            footage, and propose <strong>FSH-TAL</strong>, a temporal localization model that
+            learns from point annotations and predicts behavior-specific temporal segments in
+            full-length videos. On our dataset, FSH-TAL reaches state-of-the-art mAP (42.8%
+            averaged across IoU 0.1&ndash;0.7).
           </div>
         </div>
       </div>
@@ -177,9 +181,10 @@
             <div class="columns is-centered">
               <div class="column">
                 <p style="text-align: left; font-size: 18px;">17 hour-long recordings of paired
-                  <em>Astatotilapia burtoni</em> (25&nbsp;FPS) give 6,517 point-annotated events
-                  across six behaviors: Bite, Lead, Peck, Quiver, Chase/Charge, and Tilt. All
-                  results use 5-fold cross-validation.</p>
+                  <em>Astatotilapia burtoni</em> (25&nbsp;FPS) give 8,202 point-annotated events
+                  across six behaviors: Bite, Lead, Peck, Quiver, Chase, and Tilt, each annotated
+                  by 4 observers for inter-rater reliability. All results use 5-fold
+                  cross-validation.</p>
               </div>
             </div>
           </div>
@@ -259,77 +264,10 @@
                 <p style="text-align: left; font-size: 18px;"><span class="fshtal">FSH-TAL</span>
                   reaches 42.8% mAP (IoU 0.1&ndash;0.7), ahead of weakly-supervised (ASM-Loc,
                   HR-Pro) and fully-supervised (ActionFormer) baselines at every IoU threshold,
-                  despite training on point labels alone.</p>
+                  despite training on point labels alone. &dagger; Not including parameters used
+                  to generate embeddings.</p>
               </div>
             </div>
-
-            <h3 class="title is-4" style="margin-top: 2rem;">Ablations</h3>
-            <div class="columns is-centered">
-              <div class="column">
-                <p class="has-text-centered"><strong>Input features</strong></p>
-                <div class="table-wrap">
-                  <table class="table is-bordered is-narrow is-hoverable is-fullwidth">
-                    <thead>
-                      <tr>
-                        <th class="has-text-centered">MIL</th>
-                        <th class="has-text-centered">SAM3</th>
-                        <th class="has-text-centered">0.1</th>
-                        <th class="has-text-centered">0.7</th>
-                        <th class="has-text-centered">Avg</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td class="has-text-centered">&#10007;</td><td class="has-text-centered">&#10007;</td>
-                        <td class="has-text-centered">41.2</td><td class="has-text-centered">14.7</td><td class="has-text-centered">30.5</td>
-                      </tr>
-                      <tr>
-                        <td class="has-text-centered">&#10003;</td><td class="has-text-centered">&#10007;</td>
-                        <td class="has-text-centered">44.6</td><td class="has-text-centered">17.0</td><td class="has-text-centered">33.2</td>
-                      </tr>
-                      <tr class="best-row">
-                        <td class="has-text-centered">&#10003;</td><td class="has-text-centered">&#10003;</td>
-                        <td class="has-text-centered">53.3</td><td class="has-text-centered">24.7</td><td class="has-text-centered">42.8</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-              <div class="column">
-                <p class="has-text-centered"><strong>Output heads</strong></p>
-                <div class="table-wrap">
-                  <table class="table is-bordered is-narrow is-hoverable is-fullwidth">
-                    <thead>
-                      <tr>
-                        <th class="has-text-centered">Centerness</th>
-                        <th class="has-text-centered">Timespan</th>
-                        <th class="has-text-centered">0.1</th>
-                        <th class="has-text-centered">0.7</th>
-                        <th class="has-text-centered">Avg</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td class="has-text-centered">&#10003;</td><td class="has-text-centered">&#10007;</td>
-                        <td class="has-text-centered">52.2</td><td class="has-text-centered">24.8</td><td class="has-text-centered">42.2</td>
-                      </tr>
-                      <tr>
-                        <td class="has-text-centered">&#10007;</td><td class="has-text-centered">&#10003;</td>
-                        <td class="has-text-centered">54.3</td><td class="has-text-centered">24.5</td><td class="has-text-centered">43.1</td>
-                      </tr>
-                      <tr class="best-row">
-                        <td class="has-text-centered">&#10003;</td><td class="has-text-centered">&#10003;</td>
-                        <td class="has-text-centered">53.3</td><td class="has-text-centered">24.7</td><td class="has-text-centered">42.8</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-            <p style="text-align: left; font-size: 18px;">&dagger; Not including parameters used
-              to generate embeddings. SAM3-tracked, classification-aware features drive most of
-              the gain (+9.6% mAP); the centerness and timespan heads matter less on average but
-              trade off at high IoU.</p>
           </div>
         </div>
       </div>
