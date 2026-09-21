@@ -2,10 +2,6 @@ body {
   font-family: 'Noto Sans', sans-serif;
 }
 
-.no-bottom-padding {
-  padding-bottom: 0;
-}
-
 .link-block a {
     margin-top: 5px;
     margin-bottom: 5px;
@@ -16,9 +12,11 @@ body {
   font-weight: 700;
 }
 
-.teaser .hero-body {
-  padding-top: 0;
-  padding-bottom: 3rem;
+/* Every page section (hero or plain) gets the same top/bottom padding,
+   so the gap between any two adjacent sections is uniform. */
+.hero .hero-body,
+.section {
+  padding: 3rem 1.5rem;
 }
 
 .teaser {
