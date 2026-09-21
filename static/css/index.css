@@ -19,6 +19,16 @@ body {
   padding: 3rem 1.5rem;
 }
 
+/* The title/author/links hero flows straight into the TL;DR teaser
+   beneath it, with no gap between them. */
+.landing .hero-body {
+  padding-bottom: 0;
+}
+
+.tldr-section {
+  padding-top: 0;
+}
+
 .teaser {
   font-family: 'Google Sans', sans-serif;
 }
