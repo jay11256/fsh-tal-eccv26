@@ -106,3 +106,40 @@ body {
 .best-row td {
   font-weight: 700;
 }
+
+.clip-grid-wrap {
+  overflow-x: auto;
+  margin-top: 1.5rem;
+}
+
+.clip-grid {
+  display: grid;
+  grid-template-columns: max-content repeat(7, 1fr);
+  gap: 4px;
+  align-items: center;
+  min-width: 760px;
+}
+
+.clip-grid img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 4px;
+}
+
+.clip-grid-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #374151;
+  padding-right: 10px;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.clip-grid-colhead {
+  font-size: 12px;
+  font-weight: 600;
+  color: #6b7280;
+  text-align: center;
+  padding-bottom: 2px;
+}
