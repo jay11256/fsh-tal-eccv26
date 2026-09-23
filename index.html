@@ -31,7 +31,7 @@
           <h1 class="title is-1 publication-title">Automated Temporal Localization of Behavior
             in Cichlid Fish with Few-Shot Trajectory Tokens</h1>
           <div class="is-size-5 publication-authors">
-            <span class="author-block"><a target="_blank" href="https://bds062.github.io/">Bhargav Srinivasan</a><sup>1,&ast;</sup>,</span>
+            <span class="author-block"><a target="_blank" href="https://bds062.github.io/">Bhargav Srinivasan</a><sup>1,2,&ast;</sup>,</span>
             <span class="author-block">William Lamousin<sup>1,&ast;</sup>,</span>
             <span class="author-block">Jason Liu<sup>1,&dagger;</sup>,</span>
             <span class="author-block">Charles Phan<sup>1,&dagger;</sup>,</span>
@@ -47,40 +47,40 @@
             <span class="author-block"><a target="_blank" href="https://www.cs.umd.edu/~abhinav/">Abhinav Shrivastava</a><sup>1</sup></span>
             <br><sup>1</sup>Dept.&nbsp;of Computer Science, University of Maryland&nbsp;&nbsp;&nbsp;<sup>2</sup>Dept.&nbsp;of Biology, University of Maryland
             <br>&ast; Equal contribution.&nbsp;&nbsp;&nbsp;&dagger; Equal contribution.
-            <br>CV4Ecology Workshop, ECCV 2026
+            <!-- <br>CV4Ecology Workshop, ECCV 2026 -->
           </div>
 
           <div class="column has-text-centered">
             <div class="publication-links">
               <span class="link-block">
-                <a href="https://bds062.github.io/projects/cichlid-social-behavior/assets/Fish_Behavior_CV4E_2026.pdf"
+                <a target="_blank" href="https://bds062.github.io/projects/cichlid-social-behavior/assets/Fish_Behavior_CV4E_2026.pdf"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon"><i class="fas fa-file-pdf"></i></span>
                   <span>Paper</span>
                 </a>
               </span>
               <span class="link-block">
-                <a href="https://openreview.net/forum?id=T4haB8tCOJ"
+                <a target="_blank" href="https://openreview.net/forum?id=T4haB8tCOJ"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon"><i class="ai ai-open-access"></i></span>
                   <span>OpenReview</span>
                 </a>
               </span>
               <span class="link-block">
-                <a href="https://github.com/bds062/FSH-TAL"
+                <a target="_blank" href="https://github.com/bds062/FSH-TAL"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon"><i class="fab fa-github"></i></span>
                   <span>Code</span>
                 </a>
               </span>
               <span class="link-block">
-                <a href="https://huggingface.co/datasets/bds062/cichlid-behavior-pairs"
+                <a target="_blank" href="https://huggingface.co/datasets/bds062/cichlid-behavior-pairs"
                    class="external-link button is-normal is-rounded is-dark">
                   <span>&#129303; Data</span>
                 </a>
               </span>
               <span class="link-block">
-                <a href="https://huggingface.co/bds062/fsh-tal"
+                <a target="_blank" href="https://huggingface.co/bds062/fsh-tal"
                    class="external-link button is-normal is-rounded is-dark">
                   <span>&#129303; Models</span>
                 </a>
@@ -99,7 +99,7 @@
       <div class="column tldr-column">
         <p class="tldr-responsive">
           <span class="tldr-label">TL;DR</span><em>Point-supervised temporal action localization
-          for cichlid courtship behavior, trained only on the timestamps biologists already
+          for cichlid behavior, trained only on point annotations.
           collect.</em>
         </p>
       </div>
@@ -158,11 +158,11 @@
       </div>
       <br>
       <h2 class="subtitle">
-        <strong>FSH-TAL</strong> has three stages. <strong>(A)</strong> SAM3 segments both fish
+        <strong>FSH-TAL</strong> has three stages.<br><strong>(A)</strong> SAM3 segments both fish
         from the text prompt &ldquo;fish&rdquo; and we track 18 points per clip across the
-        predicted masks. <strong>(B)</strong> A few-shot MIL classifier, built on Trokens, fuses
+        predicted masks.<br><strong>(B)</strong> A few-shot MIL classifier, built on Trokens, fuses
         DINOv2 features with the tracked trajectories, trained in 5-way 3-shot episodes so
-        co-occurring behaviors share a clip. <strong>(C)</strong> FSH-TAL trains a temporal
+        co-occurring behaviors share a clip.<br><strong>(C)</strong> FSH-TAL trains a temporal
         transformer on the frozen MIL embeddings at 4&nbsp;FPS, predicting behavior, timespan, and
         centerness, decoded with greedy NMS per behavior.
       </h2>
@@ -177,16 +177,6 @@
         <h2 class="title is-2" style="text-align: center; padding-bottom: 10px;">Dataset</h2>
         <div class="columns is-centered has-text-centered">
           <div class="column is-four-fifths">
-            <img src="./static/images/behavior_counts.png" alt="Annotated events per behavior class" width="60%">
-            <div class="columns is-centered">
-              <div class="column">
-                <p style="text-align: left; font-size: 18px;">17 hour-long recordings of paired
-                  <em>Astatotilapia burtoni</em> (25&nbsp;FPS) give 8,202 point-annotated events
-                  across six behaviors: Bite, Lead, Peck, Quiver, Chase, and Tilt, each annotated
-                  by 4 observers for inter-rater reliability. All results use 5-fold
-                  cross-validation.</p>
-              </div>
-            </div>
             <div class="clip-grid-wrap">
               <div class="clip-grid">
                 <div class="clip-grid-label"></div>
@@ -224,6 +214,15 @@
                 <img src="./static/images/dataset_examples/clip_example5_tracks.gif" alt="Clip example 5 tracked points" loading="lazy">
                 <img src="./static/images/dataset_examples/clip_example6_tracks.gif" alt="Clip example 6 tracked points" loading="lazy">
                 <img src="./static/images/dataset_examples/clip_example7_tracks.gif" alt="Clip example 7 tracked points" loading="lazy">
+              </div>
+            </div>
+            <img src="./static/images/behavior_counts.png" alt="Annotated events per behavior class" width="60%" style="margin-top: 1.5rem;">
+            <div class="columns is-centered">
+              <div class="column">
+                <p style="text-align: left; font-size: 18px;">17 hour-long recordings of paired
+                  <em>Astatotilapia burtoni</em> (25&nbsp;FPS) give 8,202 point-annotated events
+                  across six behaviors: Bite, Lead, Peck, Quiver, Chase, and Tilt, each annotated
+                  by 4 observers for inter-rater reliability.</p>
               </div>
             </div>
           </div>
